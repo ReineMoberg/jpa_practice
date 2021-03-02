@@ -1,17 +1,28 @@
 package se.lexicon.ReineMoberg.jpa_practice.entity;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+@Entity //Define class as database entity (Table)
+//@Table(name = "TBL_STUDENT") //If we want another name than 'student' in table
 public class Student {
 
+    @Id  //Primary key for the table
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //Means auto_increment
     private int studentId;
+    @Column(nullable = false, length = 255)
     private String firstName;
+    @Column(nullable = false, length = 255)
     private String lastName;
+    @Column(nullable = false, length = 100, unique = true)  //Unique value required
     private String email;
+    @Column(nullable = false)
     private LocalDate birthDate;
+    @Column(nullable = false, columnDefinition = "tinyint(1) default 1") //Boolean with default value 1
     private boolean status;
+    @Column(nullable = false)
     private LocalDateTime registerDate;
 
     public Student() {
